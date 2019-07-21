@@ -13,6 +13,7 @@ You'll need:
 * To change the 'username' and 'password' variables in the script to your LPix username and password.\
 _Be sure not to share a copy of the script that has your personal user/pass with others!_
 
+\
 
 # Using Megasend
 
@@ -26,12 +27,12 @@ The basic idea is just run the script and feed it names of files to upload, such
 
 It'll upload those files, or tell you what went wrong.
 
-
+\
 You can change what gallery your files are uploaded to by changing the value of the 'gallery' variable in the script. The name should match the name of one of your existing LPix galleries.
 
 If you have a boosted upload limit, you can also change the script's 'my\_mb\_limit' variable to let Megasend know - normally it's set to 2, for a 2MB upload limit, but you can change it to the size of your personal limit.
 
-
+\
 
 # Future Improvements 
 
