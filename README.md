@@ -10,7 +10,7 @@ You'll need:
 
 * The ['requests'] python module to be installed. Check the link for instructions.
 
-* To change the 'username' and 'password' variables in the script to your LPix username and password. 
+* To change the 'username' and 'password' variables in the script to your LPix username and password.\
 _Be sure not to share a copy of the script that has your personal user/pass with others!_
 
 
