@@ -28,28 +28,32 @@ It'll upload those files, or tell you what went wrong.
 
 ## Options: Image URL Logging, Custom Galleries
 
-Megasend has three command-line options. They are --log, --tlog, and --gallery.
+Megasend has three command-line options. They are *--log*, *--tlog*, and *--gallery*.
 
---log and --tlog will write the image URLs of the uploaded images to a log file you specify, with \[img\]\[/img\] tags (when using --log) or \[timg\]\[/timg\] tags (when using --tlog) around them. This can be handy for batch-replacing the URLs into a post later.
+### Logging
 
-If you specify the same file for both --log and --tlog, each file's \[img\] and \[timg\] links are kept together.
+*--log* and *--tlog* will write the image URLs of the uploaded images to a log file you specify, with \[img\]\[/img\] tags (when using --log) or \[timg\]\[/timg\] tags (when using --tlog) around them. This can be handy for batch-replacing the URLs into a post later.
+
+If you specify the same file for both --log and --tlog, each file's \[img\] and \[timg\] links are kept together in the resulting log.
 
 `./megasend.py --log image_urls.txt FileBatch*.png`
 
 `./megasend.py --tlog thumb_urls.txt HowToMakeOneMillionImagesInThirtyDays*.png`
 
-`./megasend.py --log image_urls.txt --tlog thumb_urls.txt upload_this.png`
+`./megasend.py --log image_urls.txt --tlog thumb_urls.txt Pic_Of_My_Thumb.png`
 
-You can use --gallery to change what gallery your files are uploaded to, if given the name of the gallery (in quotes).
+### Custom Gallery Selection
+
+You can use *--gallery* to choose what gallery your files are uploaded to, if given the name of the gallery (in quotes).
 
 If the gallery of the name you specified doesn't exist, I have no idea what will happen. Please double-check your gallery names before uploading.
 
 `./megasend.py --gallery "Dubstep Visualizations" Bass_Drop.png`
 
 
-## Boosted Upload Limit
+## Advanced Configuration: Boosted Upload Limit
 
-If you have a boosted upload limit, you can also change the script's 'my\_mb\_limit' variable to let Megasend know - normally it's set to 2, for a 2MB upload limit, but you can change it to the size of your personal limit.  
+If you have a boosted upload limit, you can also change the script's 'my\_mb\_limit' variable to let Megasend know - normally it's set to 2, for a 2MB upload limit, but you can change it to the size of your personal limit. Megasend will normally skip oversize files to save your bandwidth.  
   
 
 # Future Improvements 
