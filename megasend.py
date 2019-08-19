@@ -58,7 +58,7 @@ for file in args.files:
 			continue #move on
 			
 		if not isfile(file):
-			print("File {} not found.".format(file))
+			print("File {} not found.\n".format(file))
 			log("Couldn't find file {}.\n".format(file))
 			continue #move on	
 			
@@ -68,7 +68,7 @@ for file in args.files:
 			#size check
 			size = getsize(file)
 			if size > 1024 * 1024 * my_mb_limit:
-				print("This file is too big to upload (over {} MB).".format(my_mb_limit))
+				print("This file is too big to upload (over {} MB).\n".format(my_mb_limit))
 				log("Skipped overlarge file {}.\n".format(file))
 				continue #skip file
 		
@@ -96,7 +96,7 @@ for file in args.files:
 				else:
 					error_explanation = 'unknown error, using the error code "{}".'.format(error)
 					permanent_error = True
-				print("Received error when uploading {}: {}")
+				print("Received error when uploading {}: {}\n")
 				log("Couldn't upload file {}.\n".format(file))
 				if permanent_error: 
 					print("Stopping now.")
