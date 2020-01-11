@@ -73,7 +73,13 @@ for file in args.files:
 				continue #skip file
 		
 			r = requests.post("https://lpix.org/api", data={'username':username, 'password':password, 'gallery':args.gallery, 'output':'json'}, files={'file': thisfile}) #actually upload file
-			result = r.json()
+			
+			try:
+				result = r.json()
+			except ValueError:
+				print("I sent the file, but no response while uploading. You might want to try uploading it again later.")
+				log("No server response while uploading file {}.\n".format(file))
+				continue #next please
 			
 			if result['err'] is not None: #check for fails, tell people
 				error = result['err']
