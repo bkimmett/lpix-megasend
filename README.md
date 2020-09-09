@@ -8,9 +8,11 @@ You'll need:
 
 * Python installed on your computer. (Python 2 or 3 should both work.)
 
-* The ['requests'] python module to be installed. Run `pip install requests` to install it. 
-** No `pip`? Try `python -m ensurepip` or `python3 -m ensurepip` to try and install `pip`.
-** Python complains `requests` still isn't installed? try `python -m pip install requests` (or `python3 -m pip install requests`) and see if that installs it.
+* The ['requests'] python module to be installed. Run `pip install requests` to install it.
+
+  * No `pip`? Try `python -m ensurepip` or `python3 -m ensurepip` to try and install `pip`.
+
+  * Python complains `requests` still isn't installed? try `python -m pip install requests` (or `python3 -m pip install requests`) and see if that installs it.
 
 * To change the 'username' and 'password' variables in the script to your LPix username and password.\
 _Be sure not to share a copy of the script that has your personal user/pass with others!_  
