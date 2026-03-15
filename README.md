@@ -6,7 +6,7 @@ Batch file uploader for the LPix image hosting service.
 
 You'll need:
 
-* Python installed on your computer. (Python 2 or 3 should both work.)
+* Python installed on your computer.
 
 * The ['requests'] python module to be installed. Run `pip install requests` to install it.
 
@@ -32,11 +32,11 @@ It'll upload those files, or tell you what went wrong.
 
 ## Options: Image URL Logging, Custom Galleries
 
-Megasend has three command-line options. They are *--log*, *--tlog*, and *--gallery*.
+Megasend has five command-line options. They are *--log*, *--tlog*, *--gallery*, *--img-link-only*, and *--timg-link-only*.
 
 ### Logging
 
-*--log* and *--tlog* will write the image URLs of the uploaded images to a log file you specify, with \[img\]\[/img\] tags (when using --log) or \[timg\]\[/timg\] tags (when using --tlog) around them. This can be handy for batch-replacing the URLs into a post later.
+*--log* and *--tlog* will write the image URLs of the uploaded images to a log file you specify, with \[img\]\[/img\] tags (when using *--log*) or \[timg\]\[/timg\] tags (when using *--tlog*) around them. This can be handy for batch-replacing the URLs into a post later.
 
 If you specify the same file for both --log and --tlog, each file's \[img\] and \[timg\] links are kept together in the resulting log.
 
@@ -53,6 +53,16 @@ You can use *--gallery* to choose what gallery your files are uploaded to, if gi
 If the gallery of the name you specified doesn't exist, I have no idea what will happen. Please double-check your gallery names before uploading.
 
 `./megasend.py --gallery "Dubstep Visualizations" Bass_Drop.png`
+
+### Automated Use
+
+The *--img-link-only* and *--timg-link-only* options are designed for Megasend to be used with other automated tools. 
+
+When either is present, the script will skip regular output messages and (if an upload is successful) output the link to the image, wrapped in [img][/img] tags (with *--img-link-only*), or the output to the thumbnail, wrapped in [timg][/timg] tags (when using *--timg-link-only*).
+
+If the script runs into an error, though, it will still output its regular error messages.
+
+You can't use both *--img-link-only* and *--timg-link-only* at the same time; the program will complain and refuse to run.
 
 
 ## Advanced Configuration: Boosted Upload Limit
