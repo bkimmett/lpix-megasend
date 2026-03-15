@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from __future__ import print_function
 from sys import argv, exit
 from os.path import basename, getsize, isfile, isdir
@@ -11,11 +11,11 @@ password = 'hunter2'
 my_mb_limit = 2 #Most LPix users have a 2 MB upload limit. If you have a boosted upload limit, increase this number to your personal limit, in MB.
 
 def print_usage():
-	print("usage: {} [--help] [--log <log_file>] [--tlog <log_file>] [--gallery <gallery_name>] file1 [file2] [file3...]".format(basename(argv[0])))
+	print("usage: {} [--help] [--log <log_file>] [--tlog <log_file>] [--gallery <gallery_name>] [--img-link-only] [--timg-link-only] file1 [file2] [file3...]".format(basename(argv[0])))
 	
 def print_help():
 	print_usage()
-	print("\n--log and --tlog take the name of a log file to store all resulting image URLs. The --log file saves [img] codes, and the --tlog file saves [timg] codes.\n--gallery takes the name of the gallery to upload to. If you don't specify, 'Default' is used.\n")
+	print("\n--log and --tlog take the name of a log file to store all resulting image URLs. The --log file saves [img] codes, and the --tlog file saves [timg] codes.\n--gallery takes the name of the gallery to upload to. If you don't specify, 'Default' is used.\n--img-link-only and --timg-link-only change the program's text output to just the [img] or [timg] link, BBCode tags included. Errors will still be emitted, though.\n")
 	
 
 if len(argv) < 2: #no arguments at ALL? display help message
@@ -27,6 +27,8 @@ parser = argparse.ArgumentParser(usage="%(prog)s [--help] [--log <log_file>] [--
 parser.add_argument('--help', action='store_true')
 parser.add_argument('--log', default=None, type=argparse.FileType('a'))
 parser.add_argument('--tlog', default=None, type=argparse.FileType('a'))
+parser.add_argument('--img-link-only', action='store_true')	 
+parser.add_argument('--timg-link-only', action='store_true')	 
 parser.add_argument('--gallery', default="Default") #this sets the gallery. It may fall over if you renamed your default gallery and you don't tell it the new name.
 parser.add_argument('files', nargs='*') #all other arguments treated as file names  #nargs=argparse.REMAINDER)
 
@@ -35,6 +37,10 @@ args = parser.parse_args()
 #if you did --help, print the help message
 if args.help:
 	print_help()
+	exit()
+
+if args.img_link_only and args.timg_link_only:
+	print("Error: Only one of --img-link-only and --timg-link-only can be on at a time.")
 	exit()
 
 #set up logging
@@ -63,7 +69,8 @@ for file in args.files:
 			continue #move on	
 			
 		with open(file, 'rb') as thisfile:
-			print("Uploading file {}.".format(file))
+			if not(args.img_link_only or args.timg_link_only):
+				print("Uploading file {}.".format(file))
 			
 			#size check
 			size = getsize(file)
@@ -110,7 +117,12 @@ for file in args.files:
 				continue #otherwise, if there's an error, jump to the next file	
 				
 			#report success	
-			print("Image URL: [img]{}[/img]\nThumbnail code: [timg]{}[/timg]\n".format(result['imageurl'],result['thumburl']))
+			if args.img_link_only:
+				print("[img]{}[/img]".format(result['imageurl']))
+			elif args.timg_link_only:
+				print("[timg]{}[/timg]".format(result['thumburl']))
+			else:
+				print("Image URL: [img]{}[/img]\nThumbnail code: [timg]{}[/timg]\n".format(result['imageurl'],result['thumburl']))
 			#log it (custom text)
 			if args.log is not None:
 				args.log.write('[img]{}[/img]\n'.format(result['imageurl']))
